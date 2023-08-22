@@ -7,9 +7,6 @@ import { useRouter } from "next/router";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
 function MeetupInfo(props) {
-  const router = useRouter();
-  const id = router.query.meetupId;
-
   return (
     <Fragment>
       <Head>
@@ -37,31 +34,11 @@ export async function getStaticPaths() {
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
-
-    //  [
-    //   {
-    //     params: {
-    //       meetupId: "m1",
-    //     },
-    //   },
-    //   {
-    //     params: {
-    //       meetupId: "m2",
-    //     },
-    //   },
-    //   {
-    //     params: {
-    //       meetupId: "m3",
-    //     },
-    //   },
-    // ],
   };
 }
 
 export async function getStaticProps(content) {
   const meetupId = content.params.meetupId;
-
-  console.log(meetupId);
 
   const client = await MongoClient.connect(
     "mongodb+srv://SahilNextJs:l2O8bj5Xe8d84JFg@cluster0.bs1oqqy.mongodb.net/meetups?retryWrites=true&w=majority"
